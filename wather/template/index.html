@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .weather-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Information</h1>
+        <form action="{% url 'search_weather' %}" method="GET">
+            <label for="city">Enter City Name:</label>
+            <input type="text" id="city" name="city" placeholder="E.g., New York">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if weather_info %}
+        <div class="weather-info">
+            <h2>Weather Information for {{ weather_info.city }}</h2>
+            <p>Description: {{ weather_info.description }}</p>
+            <p>Temperature: {{ weather_info.temp }}°C</p>
+            <img src="http://openweathermap.org/img/wn/{{ weather_info.icon }}.png" alt="Weather Icon">
+            <p>Date: {{ weather_info.day }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
